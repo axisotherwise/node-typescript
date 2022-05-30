@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/axisotherwise/notice_ts/issues"
   },
-  "homepage": "https://github.com/axisotherwise/notice_ts#readme"
+  "homepage": "https://github.com/axisotherwise/notice_ts#readme",
+  "dependencies": {
+    "morgan": "^1.10.0"
+  }
 }
