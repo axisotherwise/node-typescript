@@ -15,10 +15,6 @@ Sequelize 설정 관련
 - 시퀄라이즈 5버전부터 클래스를 통한 모델 생성(4버전 define)
 - 순환 참조로 발생하는 문제를 방지하기 위해 index.ts와 sequelize.ts를 별도로 분리하여 작성한다.
 - 시퀄라이즈는 런타임 실행 환경에 의존한다.
-- 관계 메서드(associate) 임포트 시 다른 모델과의 구분을 위해 as 키워드를 사용한다. 
-- 
-- (associate as associateUser)
-- process.env는 타입 추론이 애매하므로 직접 타입을 지정한다. 
-- 
-- process.env.NODE_ENV as ("production" | "development")
+- 관계 메서드(associate) 임포트 시 다른 모델과의 구분을 위해 as 키워드를 사용한다. (associate as associateUser)
+- process.env는 타입 추론이 애매하므로 직접 타입을 지정한다. process.env.NODE_ENV as ("production" | "development")
 
