@@ -1,7 +1,12 @@
 {
+  "ts-node": {
+    "files": true,
+  },
   "compilerOptions": {
     "strict": true,
     "lib": ["es2015", "es2016", "es2017", "es2018", "es2019", "es2020"],
-    "moduleResolution": "node" // classic은 옛날 모듈(AMD) 
-  }
+    "moduleResolution": "node", // classic은 옛날 모듈(AMD)
+  //  "typeRoots": ["./types"],  // default는 node_modules안 @types를 전부 가져온다.
+  },
+  // "files": ["./app.ts", "./types/index.d.ts"], // 컴파일 할 파일 지정(임포트는 전부 컴파일)
 }

@@ -7,6 +7,7 @@ type Config = {
   database: string;
   host: string;
   dialect: "mysql";
+  logging?: boolean;
 }
 
 interface IConfigGroup {
@@ -21,7 +22,8 @@ const config: IConfigGroup = {
     "password": "axisotherwise",
     "database": "notice_ts",
     "host": "127.0.0.1",
-    "dialect": "mysql"
+    "dialect": "mysql",
+    "logging": false,
   },
   "test": {
     "username": "root",
