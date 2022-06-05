@@ -1,6 +1,4 @@
-import { Request, Response, NextFunction } from "express";
+import { Request, Response, NextFunction, ErrorRequestHandler } from "express";
 
 const authJoin = (req: Request, res: Response, next: NextFunction) => {
-  console.log(req.body);
-  res.end();
 }

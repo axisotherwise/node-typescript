@@ -5,40 +5,37 @@ type Config = {
   username: string;
   password: string;
   database: string;
-  host: string;
-  dialect: "mysql";
-  logging?: boolean;
+  [key: string]: string;
 }
 
-interface IConfigGroup {
+interface IConfig {
   development: Config;
   test: Config;
   production: Config;
 }
 
-const config: IConfigGroup = {
+const config: IConfig = {
   "development": {
-    "username": "root",
-    "password": "axisotherwise",
-    "database": "notice_ts",
+    "username": process.env.ID!,
+    "password": process.env.DB_PASSWORD!,
+    "database": process.env.DB!,
     "host": "127.0.0.1",
-    "dialect": "mysql",
-    "logging": false,
+    "dialect": "mysql"
   },
   "test": {
     "username": "root",
-    "password": null!,
+    "password": process.env.DB_PASSWORD!,
     "database": "database_test",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
   "production": {
     "username": "root",
-    "password": null!,
+    "password": process.env.DB_PASSWORD!,
     "database": "database_production",
     "host": "127.0.0.1",
     "dialect": "mysql"
   }
 };
 
-export default config;
+export default config

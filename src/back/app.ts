@@ -1,23 +1,23 @@
-import * as express from "express";
-import * as nunjucks from "nunjucks";
-import * as morgan from "morgan";
-import * as cors from "cors";
-import * as cookieParser from "cookie-parser";
-import * as session from "express-session";
-import * as dotenv from "dotenv";
-import * as hpp from "hpp";
-import * as helmet from "helmet";
-import * as path from "path";
-import * as passport from "passport";
+import express from "express";
+import nunjucks from "nunjucks";
+import morgan from "morgan";
+import cors from "cors";
+import cookieParser from "cookie-parser";
+import session from "express-session";
+import dotenv from "dotenv";
+import hpp from "hpp";
+import helmet from "helmet";
+import path from "path";
+import passport from "passport";
 
 import indexRouter from "./routes/index";
 import authRouter from "./routes/auth";
 
-import { sequelize } from "./models/index";
-import { Request, Response, NextFunction } from "express";
+import sequelize from "./models/sequelize";
+import { Application, Request, Response, NextFunction, ErrorRequestHandler } from "express";
 
 dotenv.config();
-const app: express.Application = express();
+const app: Application = express();
 
 app.set("port", process.env.PORT || 1000);
 app.set("view engine", "html");
@@ -48,6 +48,21 @@ app.use(session({
 app.use("/", indexRouter);
 app.use("/auth", authRouter);
 
+app.use((req, res, next) => {
+  const error: object = {
+    message: `${req.method} ${req.url} 존재하지 않습니다.`,
+    status: 404,
+  }
+  next(error);
+});
+
+app.use((err: ErrorRequestHandler, req: Request, res: Response, next: NextFunction) => {
+  res.locals.message = err;
+  res.locals.error = process.env.NODE_ENV !== "production" ? err : {};
+  res.status(500);
+  res.render("error");
+;});
+
 app.listen(app.get("port"), (): void => {
   console.log(1000);
-}); 
+});
