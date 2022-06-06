@@ -14,7 +14,7 @@ import indexRouter from "./routes/index";
 import authRouter from "./routes/auth";
 
 import sequelize from "./models/sequelize";
-import { Application, Request, Response, NextFunction, ErrorRequestHandler } from "express";
+import { Application, RequestHandler, ErrorRequestHandler } from "express";
 
 dotenv.config();
 const app: Application = express();
@@ -25,9 +25,9 @@ nunjucks.configure("views", {
   express: app,
   watch: true,
 });
-sequelize.sync({ force: false })
-  .then(() => console.log("db connect"))
-  .catch((err: Error) => console.error(err));
+// sequelize.sync({ force: false })
+//   .then(() => console.log("db connect"))
+//   .catch((err: Error) => console.error(err));
 
 app.use(morgan("dev"));
 app.use("/image", express.static(path.join(__dirname, "images")));
@@ -48,6 +48,10 @@ app.use(session({
 app.use("/", indexRouter);
 app.use("/auth", authRouter);
 
+const handler: RequestHandler = (req, res, next) => {
+
+}
+
 app.use((req, res, next) => {
   const error: object = {
     message: `${req.method} ${req.url} 존재하지 않습니다.`,
@@ -56,12 +60,11 @@ app.use((req, res, next) => {
   next(error);
 });
 
-app.use((err: ErrorRequestHandler, req: Request, res: Response, next: NextFunction) => {
-  res.locals.message = err;
-  res.locals.error = process.env.NODE_ENV !== "production" ? err : {};
-  res.status(500);
-  res.render("error");
-;});
+const errorHandler: ErrorRequestHandler = (err, req, res, next) => {
+  res.locals.message = "here";
+}
+
+
 
 app.listen(app.get("port"), (): void => {
   console.log(1000);
