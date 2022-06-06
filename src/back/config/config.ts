@@ -16,7 +16,7 @@ interface IConfig {
 
 const config: IConfig = {
   "development": {
-    "username": process.env.ID!,
+    "username": process.env.DB_ID!,
     "password": process.env.DB_PASSWORD!,
     "database": process.env.DB!,
     "host": "127.0.0.1",
