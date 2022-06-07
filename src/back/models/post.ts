@@ -14,6 +14,8 @@ class Post extends Model {
   public content!: string;
   public image!: string;
   
+  public UserId!: number;
+
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 }

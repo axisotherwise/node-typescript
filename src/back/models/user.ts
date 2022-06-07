@@ -1,9 +1,12 @@
-import sequelize from "./sequelize";
+import { sequelize } from "./sequelize";
 import { dbType } from "./index";
 import {
   Model,
   DataTypes,
 } from "sequelize";
+
+import Post from "./post";
+import Comment from "./comment";
 
 class User extends Model {
   public readonly id!: number;

@@ -9,9 +9,12 @@ import hpp from "hpp";
 import path from "path";
 import passport from "passport";
 
+import testRouter from "./routes/test";
 import indexRouter from "./routes/index";
 import authRouter from "./routes/auth";
+import postRouter from "./routes/post";
 
+import passportConfig from "./passport";
 import { sequelize } from "./models/sequelize";
 import { Application, RequestHandler, ErrorRequestHandler } from "express";
 
@@ -19,12 +22,13 @@ dotenv.config();
 const app: Application = express();
 
 app.set("port", process.env.PORT || 1000);
+passportConfig();
 app.set("view engine", "html");
 nunjucks.configure("views", {
   express: app,
   watch: true,
 });
-sequelize.sync({ force: false })
+sequelize.sync({ force: true })
   .then(() => console.log("db connect"))
   .catch((err: Error) => console.error(err));
 
@@ -43,8 +47,13 @@ app.use(session({
   },
 }));
 
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use("/test", testRouter);
 app.use("/", indexRouter);
 app.use("/auth", authRouter);
+app.use("/post", postRouter);
 
 app.use((req, res, next) => {
   const error: object = {

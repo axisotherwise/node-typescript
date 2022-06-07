@@ -16,29 +16,29 @@ const authJoin: RequestHandler = async (req, res, next) => {
       name,
       married: married ? true : false,
     });
-    res.redirect("/");
+    return res.redirect("/");
   } catch (err) {
     console.error(err);
-    next(err);
+    return next(err);
   }
 };
 
-const authLogin: RequestHandler = async (req, res, next) => {
-  passport.authenticate("local", (authError, user, info) => {
+const authLogin: RequestHandler = (req, res, next) => {
+  passport.authenticate("local", (authError: Error, user: User, info: { message: string }) => {
     if (authError) {
       console.error(authError);
-      next(authError);
+      return next(authError);
     }
-    if (!user) return res.redirect("/?error=유저가 존재하지 않습니다.");
+    if (info) return res.redirect(`${info.message}`);
     return req.login(user, (loginError) => {
       if (loginError) {
         console.error(loginError);
-        next(loginError);
+        return next(loginError);
       }
       return res.redirect("/profile");
     });
-  });
-}
+  })(req, res, next);
+};
 
 export {
   authJoin,

@@ -10,8 +10,8 @@ const db = {
   Comment,
 }
 
+export type dbType =  typeof db; 
+
 associateUser(db);
 associatePost(db);
 associateComment(db);
-
-export type dbType =  typeof db;

@@ -5,7 +5,7 @@ type Config = {
   username: string;
   password: string;
   database: string;
-  [key: string]: string;
+  [key: string]: string | boolean;
 }
 
 interface IConfig {
@@ -20,7 +20,8 @@ const config: IConfig = {
     "password": process.env.DB_PASSWORD!,
     "database": process.env.DB!,
     "host": "127.0.0.1",
-    "dialect": "mysql"
+    "dialect": "mysql",
+    "logging": false
   },
   "test": {
     "username": "root",
