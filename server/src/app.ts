@@ -1,11 +1,9 @@
 import express, { Application } from "express";
 import morgan from "morgan";
 
-// const app: Application = express();
-
 class App {
-  public app: Application;
-
+  app: Application;
+  
   constructor() {
     this.app = express();
     this.setMiddleWare();
@@ -14,7 +12,7 @@ class App {
     this.app.use(morgan("dev"));
   }
   setRouter() {
-
+    this.app.use("/", );
   }
   setErrorHandler() {
   
