@@ -1,20 +1,25 @@
 import express, { Application } from "express";
 import morgan from "morgan";
 
+import userRoutes from "./routes/user.router";
+
 class App {
-  app: Application;
-  
+  public app: Application;
+
   constructor() {
     this.app = express();
     this.setMiddleWare();
+    this.setRouter();
   }
-  setMiddleWare() {
+  private setMiddleWare() {
     this.app.use(morgan("dev"));
+    this.app.use(express.json());
+    this.app.use(express.urlencoded({ extended: true }));
   }
-  setRouter() {
-    this.app.use("/", );
+  private setRouter() {
+    this.app.use("/", userRoutes);
   }
-  setErrorHandler() {
+  private setErrorHandler() {
   
   }
 }
