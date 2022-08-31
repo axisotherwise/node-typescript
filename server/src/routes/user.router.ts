@@ -1,10 +1,11 @@
 import express from "express";
 
-import * as userController from "../controllers/user.controller";
+import { UserController } from "../controllers/_.exporter";
+
+import upload from "../multer";
 
 const router = express.Router();
 
-router.get("/:id", userController.result);
-router.post("/", userController.result2);
+router.post("/", upload.single("img"), new UserController().createPost);
 
 export default router;
