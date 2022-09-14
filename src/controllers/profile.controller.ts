@@ -1,11 +1,12 @@
 import { RequestHandler } from "express";
+import { run } from "../multer";
 
 export default class UserController {
   public create: RequestHandler = async (req, res, next) => {
     try {
       const file = req.file as Express.MulterS3.File;
 
-      console.log(file);
+      run();
     } catch (err) {
       console.log(err);
     }

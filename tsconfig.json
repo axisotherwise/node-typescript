@@ -4,9 +4,9 @@
     "esModuleInterop": true, // choice true ㅡ> import * as X 
     "lib": ["ES2015", "ES2020"], // only
     "moduleResolution": "node", // only
-    "typeRoots": ["./server/src/type"],
-    "outDir": "./server/src/dist"
+    "typeRoots": ["./src/type"],
+    "outDir": "./src/dist"
   },
-  "include": ["./server/src/**/*.ts"],
+  "include": ["./src/**/*.ts"],
   
 }

@@ -1,15 +1,12 @@
 import multer from "multer";
 import multerS3 from "multer-s3";
 import { S3Client, DeleteObjectCommand } from "@aws-sdk/client-s3";
-import dotenv from "dotenv";
 import path from "path";
-
-dotenv.config();
 
 const s3 = new S3Client({
   credentials: {
-    accessKeyId: process.env.S3_ACCESS_KEY as string,
-    secretAccessKey: process.env.S3_SECRET_KEY as string,
+    accessKeyId: "AKIAZIS7CNNPTMAT4SUI",
+    secretAccessKey: "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",
   },
   region: "ap-northeast-2",
 });
@@ -17,7 +14,7 @@ const s3 = new S3Client({
 const profileImage = multer({
   storage: multerS3({
     s3: s3,
-    bucket: "cupcik",
+    bucket: "cupick-images",
     key(req, file, done) {
       done(null, `images/P${Date.now()}${path.basename(file.originalname)}`);
     },
@@ -48,11 +45,9 @@ const commentImage = multer({
   }
 });
 
-const client = new S3Client({ region: "ap-northeast-2" });
-
 const bucketPrams = { 
-  Bucket: "cupcik",
-  Key: "profile/444",
+  Bucket: "cupick-images",
+  Key: "comment/1663148118751html.jpg",
 
 };
 
@@ -64,10 +59,9 @@ const run = async () => {
   }
 }
 
-
-
 // export default upload.single("value");
 export {
   profileImage,
   commentImage,
+  run,
 }
