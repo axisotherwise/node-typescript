@@ -5,8 +5,8 @@ import path from "path";
 
 const s3 = new S3Client({
   credentials: {
-    accessKeyId: "AKIAZIS7CNNPTMAT4SUI",
-    secretAccessKey: "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",
+    accessKeyId: "0",
+    secretAccessKey: "0",
   },
   region: "ap-northeast-2",
 });
