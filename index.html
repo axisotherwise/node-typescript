@@ -7,6 +7,56 @@
     <title>Document</title>
 </head>
 <body>
-    <img src="https://projectcupick.s3.ap-northeast-2.amazonaws.com/profile/1661917234373Sequelize.png" alt="">
+    <button>here</button>
+
+    <input type="file" name="value">
+
+    <img 
+        src=""
+        alt=""
+        width="550"
+        height="200"
+        onerror="this.src.replace(/\/thumb\//, `/test/`);"
+    >
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+    const $button = document.querySelector("button");
+    const $input = document.querySelector("input");
+    const $image = document.querySelector("img");
+
+    $input.addEventListener("change", async function() {
+        try {
+            const form = new FormData();
+
+            form.append("value", this.files[0]);
+
+            const req = await axios.post("http://localhost:1000/", form);
+
+            const result = req.data.imageUrl.replace(/\/thumb\//, `/test/`);
+
+            $image.src = req.data.imageUrl;
+        } catch (err) {
+            console.log(err);
+        }
+    });
+
+    $button.addEventListener("click", async function() {
+        const req = await axios.post("http://13.125.231.146/api/recipes", {
+            title: "13번 레시피 제목",
+            content: "13번 레시피 내용",
+            isIced: true,
+            cupSize: 355,
+            isPublic: true,
+            ingredientList: [
+                {
+                    ingredientName: "13번 레시피 재료",
+                    ingredientColor: "#a63bd9",
+                    ingredientAmount: "200"
+                },
+            ]
+        })
+    });
+</script>
 </body>
 </html>
